@@ -44,8 +44,8 @@ def marking(pic):
     hsv = cv2.cvtColor(pic, cv2.COLOR_BGR2HSV)
 
     # lower bound and upper bound for Green color
-    lower_bound = np.array([25, 0, 60])
-    upper_bound = np.array([255, 255, 255])
+    lower_bound = np.array([40, 30, 0])
+    upper_bound = np.array([100, 200, 200])
 
     # find the colors within the boundaries
     mask = cv2.inRange(hsv, lower_bound, upper_bound)
@@ -57,11 +57,14 @@ def marking(pic):
     mask = cv2.morphologyEx(mask, cv2.MORPH_CLOSE, kernel)
     mask = cv2.morphologyEx(mask, cv2.MORPH_OPEN, kernel)
 
-    segmented_img = cv2.bitwise_and(pic, pic, mask=mask)
+    invert = cv2.bitwise_not(mask)
+
+    segmented_img = cv2.bitwise_and(pic, pic, mask=invert)
+
     return segmented_img
 
 
-def c_segmenting(img):
+def c_segmenting_g(img):
     hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
 
     # lower bound and upper bound for Green color
@@ -79,4 +82,5 @@ def c_segmenting(img):
     mask = cv2.morphologyEx(mask, cv2.MORPH_OPEN, kernel)
 
     segmented_img = cv2.bitwise_and(img, img, mask=mask)
+
     return segmented_img
