@@ -1,11 +1,10 @@
 import cv2
 import functions as fs
 
-IM_TMP = 'set/notHealthy/0b4a52e3-e15e-4117-b2e8-7cdb5dca3ce9___FREC_Scab 3137_90deg.JPG'
-#IM_TMP = 'pics_base/Apple-healthy/2b0d21b2-2320-4cb4-8d40-4684f0c91e55___RS_HL 7505.JPG'
+IM_TMP = 'set/notHealthy/7b3e4313-9abb-4105-8be9-2020f1101e58___FREC_Scab 3441_90deg.JPG'
 
 img = cv2.imread(IM_TMP)
-segmented_img = fs.c_segmenting_g(img)
+segmented_img = fs.c_segmenting(img)
 cv2.imshow('seg_img', segmented_img)
 
 segmented_img_gray = cv2.cvtColor(segmented_img, cv2.COLOR_BGR2GRAY)
@@ -19,6 +18,8 @@ marked_img_gray = cv2.cvtColor(marked_img, cv2.COLOR_BGR2GRAY)
 marked_img_contours, hierarchy = cv2.findContours(marked_img_gray, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 
 cv2.drawContours(segmented_img, marked_img_contours, -1, (0, 0, 255), 3)
+
+#cv2.imwrite('D:\PythonProjectsFolder\ImageProcessingProject\results', segmented_img)
 
 cv2.imshow('seg_img', segmented_img)
 cv2.waitKey(0)

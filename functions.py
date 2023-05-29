@@ -49,7 +49,6 @@ def marking(pic):
 
     # find the colors within the boundaries
     mask = cv2.inRange(hsv, lower_bound, upper_bound)
-
     # define kernel size
     kernel = np.ones((3, 3), np.uint8)
 
@@ -64,7 +63,7 @@ def marking(pic):
     return segmented_img
 
 
-def c_segmenting_g(img):
+def c_segmenting(img):
     hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
 
     # lower bound and upper bound for Green color
@@ -73,7 +72,7 @@ def c_segmenting_g(img):
 
     # find the colors within the boundaries
     mask = cv2.inRange(hsv, lower_bound, upper_bound)
-
+    mask = cv2.GaussianBlur(mask, (3, 3), 0)
     # define kernel size
     kernel = np.ones((7, 7), np.uint8)
 
