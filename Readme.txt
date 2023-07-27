@@ -1,0 +1,2 @@
+This application was created to highlight diseases on certain sets of plant leaves. I used a variety of color segmentation,
+ gaussian blur,bit operations(to create the mask), morphological operations and greyscaling.
